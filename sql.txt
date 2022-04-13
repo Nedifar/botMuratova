@@ -1,0 +1,3 @@
+MyFirstName_SQLLogin_1
+weu9ttjbe6
+MainBase.mssql.somee.com

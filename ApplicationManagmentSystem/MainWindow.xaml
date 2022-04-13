@@ -1,0 +1,52 @@
+﻿<Window x:Class="ApplicationManagmentSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationManagmentSystem"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DataGrid AutoGenerateColumns="False" x:Name="dg" IsReadOnly="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Ellipse Width="30" Height="30">
+                                    <Ellipse.Style>
+                                        <Style TargetType="{x:Type Ellipse}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding telegramProtected}" Value="true">
+                                                    <Setter Property="Fill" Value="Green"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding telegramProtected}" Value="false">
+                                                    <Setter Property="Fill" Value="Red"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Ellipse.Style>
+                                </Ellipse>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Image x:Name="img" Width="200" Height="200" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="5 0">
+                    <TextBlock Text="Name" Margin="0 5"/>
+                    <TextBox x:Name="tbName" Width="120"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="tbPhone" Margin="0 5"/>
+                    <TextBox x:Name="tbPhone" Width="120"/>
+                </StackPanel>
+            </StackPanel>
+            <Button Margin="0 5" Content="Добавить" Click="clAdd"/>
+            <Button Margin="0 5" Content="Обновить" Click="clUpdate"/>
+        </StackPanel>
+    </Grid>
+</Window>
