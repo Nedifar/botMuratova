@@ -27,25 +27,34 @@ namespace TeleBotBack
                         string mes = message.From.Id.ToString();
                         string phoneNumber = message.Text.Replace("/start ", "");
                         Models.context context = new Models.context();
-                        //if (context.Technicians.Where(p=>p.telegramId == mes).Count()==0)
-                        //{
                             var techa = context.Technicians.Where(p => p.Phone == phoneNumber).FirstOrDefault();
                             techa.telegramId = message.From.Id.ToString();
-                            techa.telegramProtected = true;
+                            techa.isTelegramActivated = true;
                             context.SaveChanges();
-                        //}
                         await botClient.SendTextMessageAsync(message.Chat, "Добро пожаловать на борт, добрый путник!");
                         return;
                     }
                     await botClient.SendTextMessageAsync(message.Chat, "Привет-привет!!");
                 }
-                catch { }
+                catch {}
             }
             else if(update.Type == Telegram.Bot.Types.Enums.UpdateType.CallbackQuery)
             {
-                var message = update.CallbackQuery.Message;
-
-                await botClient.EditMessageReplyMarkupAsync(message.Chat.Id, message.MessageId);
+                if (update.CallbackQuery.Data.Contains("заявка принята:"))
+                {
+                    Models.context context = new Models.context();
+                    var message = update.CallbackQuery.Message; //достань отсюда данные, измени request и добавь историю, также сделай проверку на то, чтобы два чела одновременно не взяли один заказ
+                    int requestId = int.Parse(update.CallbackQuery.Data.Replace("заявка принята:", ""));
+                    await botClient.SendTextMessageAsync(message.Chat.Id, "Заявка №{requestId} была успешно принята вами. Быстрее спешите на помощь.");
+                    foreach (var tech in context.RequestMessageIds.Where(p => p.idRequest == requestId).ToList())
+                    {
+                        await botClient.EditMessageReplyMarkupAsync(tech.chatId, tech.messageId);
+                    }
+                }
+                else
+                {
+                    await botClient.EditMessageReplyMarkupAsync(update.CallbackQuery.Message.Chat.Id, update.CallbackQuery.Message.MessageId);
+                }
                 return;
             }
         }

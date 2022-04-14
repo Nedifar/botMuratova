@@ -72,7 +72,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\context.cs" />
+    <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Models\HistoryService.cs" />
+    <Compile Include="Models\ItOtdelEmployee.cs" />
+    <Compile Include="Models\Placement.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\RequestMessageId.cs" />
     <Compile Include="Models\Technician.cs" />
+    <Compile Include="Models\TypeEquipment.cs" />
+    <Compile Include="Models\TypeProblem.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vacation.cs" />
+    <Compile Include="Models\ViewProblem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -20,5 +20,14 @@ namespace TeleBotBack.Models
             return _context;
         }
         public DbSet<Technician> Technicians { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<HistoryService> HistoryServices { get; set; }
+        public DbSet<ItOtdelEmployee> ItOtdelEmployees { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<TypeEquipment> TypeEquipments { get; set; }
+        public DbSet<TypeProblem> TypeProblems { get; set; }
+        public DbSet<Vacation> Vacations { get; set; }
+        public DbSet<ViewProblem> ViewProblems { get; set; }
+        public DbSet<RequestMessageId> RequestMessageIds { get; set; }
     }
 }
