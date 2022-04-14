@@ -41,6 +41,13 @@ namespace TeleBotBack
                 }
                 catch { }
             }
+            else if(update.Type == Telegram.Bot.Types.Enums.UpdateType.CallbackQuery)
+            {
+                var message = update.CallbackQuery.Message;
+
+                await botClient.EditMessageReplyMarkupAsync(message.Chat.Id, message.MessageId);
+                return;
+            }
         }
 
         public static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
